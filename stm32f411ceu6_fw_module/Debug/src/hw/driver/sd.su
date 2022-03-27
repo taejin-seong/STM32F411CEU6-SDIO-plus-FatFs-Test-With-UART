@@ -1,0 +1,14 @@
+sd.c:26:6:sdInit	16	static
+sd.c:62:6:sdDeInit	16	static
+sd.c:78:6:sdIsInit	4	static
+sd.c:85:6:sdIsDetected	8	static
+sd.c:102:6:sdGetInfo	64	static
+sd.c:131:6:sdIsBusy	16	static
+sd.c:150:6:sdIsReady	24	static
+sd.c:169:6:sdReadBlocks	32	static
+sd.c:202:6:HAL_SD_RxCpltCallback	16	static
+sd.c:208:6:HAL_SD_TxCpltCallback	16	static
+sd.c:214:6:sdWriteBlocks	32	static
+sd.c:248:6:sdEraseBlocks	24	static
+sd.c:261:6:HAL_SD_MspInit	56	static
+sd.c:360:6:HAL_SD_MspDeInit	16	static

@@ -1,0 +1,70 @@
+/*
+ * fatfs.c
+ *
+ *  Created on: 2021. 4. 3.
+ *      Author: sungt
+ */
+
+
+#include "fatfs.h"
+
+#ifdef _USE_HW_FATFS
+#include "ff_gen_drv.h"
+#include "sd_diskio.h"
+
+
+static bool is_init = false;
+
+FATFS SDFatFs;  /* File system object for SD card logical drive */
+char SDPath[4]; /* SD card logical drive path */
+
+
+bool fatfsInit(void)
+{
+  bool ret = true;
+
+
+  if(FATFS_LinkDriver(&SD_Driver, SDPath) == 0)
+  {
+    if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
+    {
+      is_init = true;
+    }
+  }
+  return ret;
+}
+
+
+#ifdef _USE_HW_UART
+FRESULT fatfsDir(char* path)
+{
+  FRESULT res;
+  DIR dir;
+  FILINFO fno;
+
+
+  res = f_opendir(&dir, path);                       /* Open the directory */
+  if (res == FR_OK)
+  {
+    for (;;)
+    {
+      res = f_readdir(&dir, &fno);                   /* Read a directory item */
+      if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
+      if (fno.fattrib & AM_DIR)
+      {                    				/* It is a directory */
+    	uartPrintf(_DEF_UART1," %s/%s \n", path, fno.fname);
+      }
+      else
+      {                                      		 /* It is a file. */
+        uartPrintf(_DEF_UART1," %s/%32s \t%d bytes\n", path, fno.fname, (int)fno.fsize);
+      }
+    }
+    f_closedir(&dir);
+  }
+
+  return res;
+}
+#endif /* _USE_HW_UART */
+
+
+#endif /* _USE_HW_FATFS */

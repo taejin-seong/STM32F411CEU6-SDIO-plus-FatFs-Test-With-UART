@@ -1,0 +1,5 @@
+gpio.c:35:6:gpioInit	24	static
+gpio.c:52:6:gpioPinMode	40	static
+gpio.c:100:6:gpioPinWrite	24	static
+gpio.c:119:6:gpioPinRead	24	static
+gpio.c:137:6:gpioPinToggle	16	static

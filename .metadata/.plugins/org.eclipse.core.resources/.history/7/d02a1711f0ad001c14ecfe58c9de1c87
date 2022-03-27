@@ -1,0 +1,291 @@
+/*
+ * ap.c
+ *
+ *  Created on: Dec 6, 2020
+ *      Author: baram
+ */
+
+
+#include "ap.h"
+
+
+
+
+ void apInit(void)
+{
+	 uartOpen(_DEF_UART1, 115200); //UART 개통
+}
+
+
+
+void apBoardLedTest(void)
+{
+
+  while(1)
+  {
+    ledToggle(_DEF_LED1);
+    delay_ms(50);
+  }
+
+}
+
+
+void apUartTest(void)
+{
+  uartPrintf(_DEF_UART1, "UART BaudRate : %d\n", uartGetBaud(_DEF_UART1));
+
+  while(1)
+  {
+    if (uartAvailable(_DEF_UART1) > 0)
+    {
+
+      uartPrintf(_DEF_UART1, "Rx Data : %c , 0x%X\n", uartRead(_DEF_UART1));
+    }
+  }
+
+}
+
+
+#ifdef _USE_HW_UART
+FRESULT fatfsDir(char* path)
+{
+  FRESULT res;
+  DIR dir;
+  FILINFO fno;
+
+
+  res = f_opendir(&dir, path);                       /* Open the directory */
+  if (res == FR_OK)
+  {
+    for (;;)
+    {
+      res = f_readdir(&dir, &fno);                   /* Read a directory item */
+      if (res != FR_OK || fno.fname[0] == 0) break;  /* Break on error or end of dir */
+      if (fno.fattrib & AM_DIR)
+      {                    				/* It is a directory */
+    	uartPrintf(_DEF_UART1," %s/%s \n", path, fno.fname);
+      }
+      else
+      {                                      		 /* It is a file. */
+        uartPrintf(_DEF_UART1," %s/%32s \t%d bytes\n", path, fno.fname, (int)fno.fsize);
+      }
+    }
+    f_closedir(&dir);
+  }
+
+  return res;
+}
+#endif /* _USE_HW_UART */
+
+
+void apSDCardTest(void)
+{
+    /**SDIO GPIO Configuration
+    PA6     ------> SDIO_CMD
+    PB15    ------> SDIO_CK
+    PA8     ------> SDIO_D1
+    PA9     ------> SDIO_D2
+    PB5     ------> SDIO_D3
+    PB7     ------> SDIO_D0
+    */
+
+
+    /* SDIO CD Pin을 사용하여 SD카드를 HW적으로 감지수행.. 만약 true(1) 라면 SD 카드가 꼿혀있음을 의미 */
+
+    if (sdIsDetected() == true) //sd card detected
+    {
+        uartPrintf(_DEF_UART1, "sd connected..\n");
+    }
+
+    else //sd card not detected
+    {
+        uartPrintf(_DEF_UART1, "sd disconnected..\n");
+    }
+
+
+    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+
+
+    sd_info_t sd_info;
+
+    /* SD Card의 정보를 출력, Get SD Card information*/
+    if (sdGetInfo(&sd_info) == true)
+    {
+    	uartPrintf(_DEF_UART1,"   card_type            : %d\n", sd_info.card_type);
+    	uartPrintf(_DEF_UART1,"   card_version         : %d\n", sd_info.card_version);
+    	uartPrintf(_DEF_UART1,"   card_class           : %d\n", sd_info.card_class);
+    	uartPrintf(_DEF_UART1,"   rel_card_Add         : %d\n", sd_info.rel_card_Add);
+    	uartPrintf(_DEF_UART1,"   block_numbers        : %d\n", sd_info.block_numbers);
+    	uartPrintf(_DEF_UART1,"   block_size           : %d\n", sd_info.block_size);
+    	uartPrintf(_DEF_UART1,"   log_block_numbers    : %d\n", sd_info.log_block_numbers);
+    	uartPrintf(_DEF_UART1,"   log_block_size       : %d\n", sd_info.log_block_size);
+    	uartPrintf(_DEF_UART1,"   card_size            : %d MB, %d.%d GB\n", sd_info.card_size, sd_info.card_size/1024, ((sd_info.card_size * 10)/1024) % 10);
+    }
+
+
+    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+
+
+
+    char rx_data;
+
+	uint32_t number = 0; // SD Card의 메모리 정보를 읽을 메모리 블럭 number 설정
+    uint32_t buf[512/4];
+
+	FATFS *fs;
+	DWORD fre_clust, fre_sect, tot_sect;
+
+	FRESULT res;
+
+	FIL log_file;
+	uint32_t pre_time;
+
+    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
+	uartPrintf(_DEF_UART1, "Select the SD Card Test...\n");
+
+
+    while (1)
+    {
+		if (uartAvailable(_DEF_UART1) > 0)
+		{
+			rx_data = uartRead(_DEF_UART1);
+
+		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
+			uartPrintf(_DEF_UART1, "Option | Description\n");
+		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
+		    uartPrintf(_DEF_UART1, "A,a    | Read physical memory (number 0) information of SD card\n");
+			uartPrintf(_DEF_UART1, "B,b    | Get volume information and print the free space 1\n");
+			uartPrintf(_DEF_UART1, "C,c    | Open the directory and Read a directory item or file name & size\n");
+			uartPrintf(_DEF_UART1, "D,d    | Create a 1.csv file and perform a w/r operation.\n");
+		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
+
+		    uartPrintf(_DEF_UART1, "\n");
+
+			uartPrintf(_DEF_UART1,"Option : %c\n", rx_data);
+
+		    uartPrintf(_DEF_UART1, "\n");
+
+			switch(rx_data)
+			{
+				case 'a' | 'A':
+				    /* SD Card의 메모리 블럭의 정보 읽기 */
+
+					if (sdReadBlocks(number, (uint8_t *)buf, 1, 100) == true)
+				    {
+				      for (int i=0; i<512/4; i++)
+				      {
+				    	 uartPrintf(_DEF_UART1,"%d:%04d : 0x%08X\n", number, i*4, buf[i]);
+				      }
+				    }
+
+				    else
+				    {
+				    	uartPrintf(_DEF_UART1,"sd read fail...\n");
+				    }
+
+				    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+				    break;
+
+
+				case 'b' | 'B':
+					/* FATFS32 파일시스템 구조를 가지는  첫번째 드라이버 전체 볼륨(크기)과 남아있는 용량 출력 */
+
+					/* Get volume information and free clusters of drive 1 */
+					res = f_getfree("", &fre_clust, &fs);
+					if (res == FR_OK)
+					{
+					    /* Get total sectors and free sectors */
+					    tot_sect = (fs->n_fatent - 2) * fs->csize;
+					    fre_sect = fre_clust * fs->csize;
+
+					    /* Print the free space (assuming 512 bytes/sector) */
+					    uartPrintf(_DEF_UART1,"%10lu KiB total drive space.\n%10lu KiB available.\n", tot_sect / 2, fre_sect / 2);
+					 }
+
+					else
+					{
+						uartPrintf(_DEF_UART1," err : %d\n", res);
+					}
+
+				    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+					break;
+
+
+				case 'c' | 'C':
+					/* FATFS32 파일시스템 구조를 가지는  첫번째 드라이버의  root 디렉토리에 있는  폴더 이름 또는 파일 이름과 용량을 출력 */
+
+					/* "/" : root 디렉토리 */
+					res = fatfsDir("/");
+					if (res != FR_OK)
+					{
+						uartPrintf(_DEF_UART1," err : %d\n", res);
+					}
+
+				    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+					break;
+
+
+				case'd' | 'D':
+					/* 1.csv 파일 생성 후 1.csv 파일에 f_printf()로 쓰고 다시 내용물을 1byte씩 읽어서 출력*/
+
+					pre_time = millis();
+					/* Write 동작 */
+//					res = f_open(&log_file, "1.csv", FA_CREATE_ALWAYS | FA_WRITE | FA_READ);
+					res = f_open(&log_file, "1.text", FA_CREATE_ALWAYS | FA_WRITE | FA_READ);
+
+					if (res == FR_OK)
+					{
+					   f_printf(&log_file, "test1, ");
+					   f_printf(&log_file, "test2, ");
+					   f_printf(&log_file, "test3, ");
+					   f_printf(&log_file, ", ");
+					   f_printf(&log_file, "\n");
+
+					   for (int i=0; i<8; i++)
+					   {
+						   f_printf(&log_file, "%d \n", i);
+					   }
+
+					   f_rewind(&log_file);
+
+
+					   UINT len;
+					   uint8_t data;
+						/* Read 동작 */
+					   while(uartAvailable(_DEF_UART1))
+					   {
+						   len = 0;
+						   res = f_read(&log_file, &data, 1, &len);
+
+					       if (res != FR_OK)
+					       {
+					         break;
+					       }
+					       if (len == 0)
+					       {
+					         break;
+					       }
+
+					       uartPrintf(_DEF_UART1, "%c", data);
+					   }
+
+					   f_close(&log_file);
+					}
+
+					else
+					{
+						uartPrintf(_DEF_UART1,"f_open fail\r\n");
+					}
+
+					uartPrintf(_DEF_UART1,"%d ms\r\n", millis()-pre_time);
+
+				    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+					break;
+
+
+				default:
+					break;
+			}
+		}
+    }
+}

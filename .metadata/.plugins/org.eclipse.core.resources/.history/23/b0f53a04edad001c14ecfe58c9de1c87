@@ -1,0 +1,216 @@
+/*
+ * ap.c
+ *
+ *  Created on: Dec 6, 2020
+ *      Author: baram
+ */
+
+
+#include "ap.h"
+
+
+
+
+ void apInit(void)
+{
+	 uartOpen(_DEF_UART1, 115200); //UART 개통
+}
+
+
+
+void apBoardLedTest(void)
+{
+
+  while(1)
+  {
+    ledToggle(_DEF_LED1);
+    delay_ms(50);
+  }
+
+}
+
+
+void apUartTest(void)
+{
+  uartPrintf(_DEF_UART1, "UART BaudRate : %d\n", uartGetBaud(_DEF_UART1));
+
+  while(1)
+  {
+    if (uartAvailable(_DEF_UART1) > 0)
+    {
+
+      uartPrintf(_DEF_UART1, "Rx Data : %c , 0x%X\n", uartRead(_DEF_UART1));
+    }
+  }
+
+}
+
+
+void apSDCardTest(void)
+{
+
+    // SDIO CD Pin을 사용하여 SD카드를 HW적으로 감지수행.. 만약 true(1) 라면 SD 카드가 꼿혀있음을 의미
+    if (sdIsDetected() == true)
+    {
+        uartPrintf(_DEF_UART1, "sd connected..\n");
+    }
+
+    else
+    {
+        uartPrintf(_DEF_UART1, "sd disconnected..\n");
+    }
+
+
+    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+
+
+    sd_info_t sd_info;
+
+    // SD Card의 정보를 출력
+    if (sdGetInfo(&sd_info) == true)
+    {
+    	uartPrintf(_DEF_UART1,"   card_type            : %d\n", sd_info.card_type);
+    	uartPrintf(_DEF_UART1,"   card_version         : %d\n", sd_info.card_version);
+    	uartPrintf(_DEF_UART1,"   card_class           : %d\n", sd_info.card_class);
+    	uartPrintf(_DEF_UART1,"   rel_card_Add         : %d\n", sd_info.rel_card_Add);
+    	uartPrintf(_DEF_UART1,"   block_numbers        : %d\n", sd_info.block_numbers);
+    	uartPrintf(_DEF_UART1,"   block_size           : %d\n", sd_info.block_size);
+    	uartPrintf(_DEF_UART1,"   log_block_numbers    : %d\n", sd_info.log_block_numbers);
+    	uartPrintf(_DEF_UART1,"   log_block_size       : %d\n", sd_info.log_block_size);
+    	uartPrintf(_DEF_UART1,"   card_size            : %d MB, %d.%d GB\n", sd_info.card_size, sd_info.card_size/1024, ((sd_info.card_size * 10)/1024) % 10);
+    }
+
+
+    uartPrintf(_DEF_UART1, "\n========================================\n\n");
+
+
+
+    char rx_data;
+
+	uint32_t number = 0; // SD Card의 정보를 읽을 메모리 블럭 설정
+    uint32_t buf[512/4];
+
+	FATFS *fs;
+	DWORD fre_clust, fre_sect, tot_sect;
+
+	FRESULT res;
+
+	FIL log_file;
+	uint32_t pre_time;
+
+
+
+    while (1)
+    {
+		if (uartAvailable(_DEF_UART1) > 0)
+		{
+			rx_data = uartRead(_DEF_UART1);
+			uartPrintf(_DEF_UART1, "Select the mode\n");
+			uartPrintf(_DEF_UART1, "a,b,c,d");
+			uartPrintf(_DEF_UART1,"%c\n", rx_data);
+
+			switch(rx_data)
+			{
+				case 'a':
+				    //SD Card의 메모리 블럭의 정보 읽기
+				    if (sdReadBlocks(number, (uint8_t *)buf, 1, 100) == true)
+				    {
+				      for (int i=0; i<512/4; i++)
+				      {
+				    	 uartPrintf(_DEF_UART1,"%d:%04d : 0x%08X\n", number, i*4, buf[i]);
+				      }
+				    }
+
+				    else
+				    {
+				    	uartPrintf(_DEF_UART1,"sd read fail...\n");
+				    }
+				    break;
+
+
+				case 'b':
+					/* Get volume information and free clusters of drive 1 */
+					res = f_getfree("", &fre_clust, &fs);
+					if (res == FR_OK)
+					{
+					    /* Get total sectors and free sectors */
+					    tot_sect = (fs->n_fatent - 2) * fs->csize;
+					    fre_sect = fre_clust * fs->csize;
+
+					    /* Print the free space (assuming 512 bytes/sector) */
+					    uartPrintf(_DEF_UART1,"%10lu KiB total drive space.\n%10lu KiB available.\n", tot_sect / 2, fre_sect / 2);
+					 }
+
+					else
+					{
+						uartPrintf(_DEF_UART1," err : %d\n", res);
+					}
+					break;
+
+
+				case 'c':
+					res = fatfsDir("/");
+					if (res != FR_OK)
+					{
+						uartPrintf(_DEF_UART1," err : %d\n", res);
+					}
+					break;
+
+
+				case'd':
+					pre_time = millis();
+					res = f_open(&log_file, "1.csv", FA_CREATE_ALWAYS | FA_WRITE | FA_READ);
+					if (res == FR_OK)
+					{
+					   f_printf(&log_file, "test1, ");
+					   f_printf(&log_file, "test2, ");
+					   f_printf(&log_file, "test3, ");
+					   f_printf(&log_file, ", ");
+					   f_printf(&log_file, "\n");
+
+					   for (int i=0; i<8; i++)
+					   {
+						   f_printf(&log_file, "%d \n", i);
+					   }
+
+					   f_rewind(&log_file);
+
+
+					   UINT len;
+					   uint8_t data;
+
+					   while(uartAvailable(_DEF_UART1))
+					   {
+						   len = 0;
+						   res = f_read(&log_file, &data, 1, &len);
+
+					       if (res != FR_OK)
+					       {
+					         break;
+					       }
+					       if (len == 0)
+					       {
+					         break;
+					       }
+
+					       uartPrintf(_DEF_UART1, "%c", data);
+					   }
+
+					   f_close(&log_file);
+					}
+
+					else
+					{
+						uartPrintf(_DEF_UART1,"f_open fail\r\n");
+					}
+
+					uartPrintf(_DEF_UART1,"%d ms\r\n", millis()-pre_time);
+					break;
+
+
+				default:
+					break;
+			}
+		}
+    }
+}

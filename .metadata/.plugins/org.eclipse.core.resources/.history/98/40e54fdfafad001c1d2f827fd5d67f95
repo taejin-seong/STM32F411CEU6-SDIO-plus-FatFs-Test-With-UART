@@ -1,0 +1,92 @@
+/*
+ * ap.c
+ *
+ *  Created on: Dec 6, 2020
+ *      Author: baram
+ */
+
+
+#include "ap.h"
+
+
+
+
+ void apInit(void)
+{
+	   uartOpen(_DEF_UART1, 115200); //UART 개통
+}
+
+
+
+void apBoardLedTest(void)
+{
+
+  while(1)
+  {
+    ledToggle(_DEF_LED1);
+    delay_ms(50);
+  }
+
+}
+
+
+void apUartTest(void)
+{
+  uartPrintf(_DEF_UART1, "UART BaudRate : %d\n", uartGetBaud(_DEF_UART1));
+
+  while(1)
+  {
+    if (uartAvailable(_DEF_UART1) > 0)
+    {
+
+      uartPrintf(_DEF_UART1, "Rx Data : %c , 0x%X\n", uartRead(_DEF_UART1));
+    }
+  }
+
+}
+
+
+void apSDCardTest(void)
+{
+
+    sd_info_t sd_info;
+
+
+    uartPrintf(_DEF_UART1, "sd connected : %d\n", sdIsDetected());
+
+
+    if (sdGetInfo(&sd_info) == true)
+    {
+    	uartPrintf(_DEF_UART1,"   card_type            : %d\n", sd_info.card_type);
+    	uartPrintf(_DEF_UART1,"   card_version         : %d\n", sd_info.card_version);
+    	uartPrintf(_DEF_UART1,"   card_class           : %d\n", sd_info.card_class);
+    	uartPrintf(_DEF_UART1,"   rel_card_Add         : %d\n", sd_info.rel_card_Add);
+    	uartPrintf(_DEF_UART1,"   block_numbers        : %d\n", sd_info.block_numbers);
+    	uartPrintf(_DEF_UART1,"   block_size           : %d\n", sd_info.block_size);
+    	uartPrintf(_DEF_UART1,"   log_block_numbers    : %d\n", sd_info.log_block_numbers);
+    	uartPrintf(_DEF_UART1,"   log_block_size       : %d\n", sd_info.log_block_size);
+    	uartPrintf(_DEF_UART1,"   card_size            : %d MB, %d.%d GB\n", sd_info.card_size, sd_info.card_size/1024, ((sd_info.card_size * 10)/1024) % 10);
+    }
+
+
+	uint32_t number;
+    uint32_t buf[512/4];
+
+
+    number = uartPrintf(_DEF_UART1, "SD Card Read Number : %d\n", uartRead(_DEF_UART1));
+
+    if (sdReadBlocks(number, (uint8_t *)buf, 1, 100) == true)
+    {
+      for (int i=0; i<512/4; i++)
+      {
+    	 uartPrintf(_DEF_UART1,"%d:%04d : 0x%08X\n", number, i*4, buf[i]);
+      }
+    }
+    else
+    {
+    	uartPrintf(_DEF_UART1,"sdRead Fail\n");
+    }
+
+
+}
+

@@ -1,0 +1,33 @@
+/*
+ * def.h
+ *
+ *  Created on: Dec 6, 2020
+ *      Author: baram
+ */
+
+#ifndef SRC_COMMON_DEF_H_
+#define SRC_COMMON_DEF_H_
+
+//TODO 공용헤더 파일 및 모듈 채널 설정
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdarg.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+#define _DEF_LED1           	0
+
+
+#define _DEF_UART1          	0
+#define _DEF_UART2          	1
+
+
+#define LED_Pin GPIO_PIN_13
+#define LED_GPIO_Port GPIOC
+#define SDIO_CD_Pin GPIO_PIN_9
+#define SDIO_CD_GPIO_Port GPIOB
+
+
+#endif /* SRC_COMMON_DEF_H_ */
