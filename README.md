@@ -175,5 +175,98 @@
 </div>
 </details>
 <hr/>
+
+
 <br><br>
 
+
+## 5. Testing<br>
+### 5.1.  Sd Card Detection and Information print
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+<img src="https://user-images.githubusercontent.com/70312248/160411780-dad0e296-969f-4faf-9593-89a0cc842baf.png" width="1300" height="750"/> 
+<br><br>
+</div>		
+</details>
+
+### 5.1.  a
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+<img src="https://user-images.githubusercontent.com/70312248/160412185-48078a05-6e51-40d0-a333-8cb10c92b53b.png" width="1300" height="750"/> 
+<br><br>
+</div>		
+</details>
+
+
+
+### 5.2.  b
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+• SD Card root directory configuration <br><br>
+<img src="https://user-images.githubusercontent.com/70312248/160413609-552fc1e4-586c-4115-8094-360147da70dd.png" width="700" height="400"/> 
+<br>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/70312248/160412539-3544aea2-b594-4892-a461-e4534497d9ab.png" width="1300" height="750"/> 
+</p> <br>
+
+  
+  
+<br><br>
+</div>		
+</details>
+
+### 5.3.  c
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+  • SD Card root directory configuration <br><br>
+<img src="https://user-images.githubusercontent.com/70312248/160413609-552fc1e4-586c-4115-8094-360147da70dd.png" width="700" height="400"/> 
+<br>
+<img src="https://user-images.githubusercontent.com/70312248/160414219-39524921-67cf-4559-aa5b-10948806d4de.png" width="1300" height="750"/> 
+<br><br>
+</div>		
+</details>
+
+### 5.4.  d
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+<img src="https://user-images.githubusercontent.com/70312248/160414412-e0edba11-a419-4eab-bb59-d74ffe97b947.png" width="1300" height="750"/> 
+<br><br>
+• SD Card root directory configuration <br><br>
+<img src="https://user-images.githubusercontent.com/70312248/160414642-9778f312-0019-4ae9-9218-e4f04f17b14b.png" width="700" height="400"/> 
+<br><br><br>
+• Test C again <br><br> 
+<img src="https://user-images.githubusercontent.com/70312248/160415153-dafdf85c-7637-4dae-83f8-6183740c6a74.png" width="1300" height="750"/> 
+<br><br><br>
+• HelloWorld.csv <br><br> 
+<img src="https://user-images.githubusercontent.com/70312248/160416575-ddac45d0-9ae2-4357-acd9-82d23a1bc152.png" width="1000" height="550"/> 
+  <br><br> 
+</div>		
+</details>
+
+### 5.5.  e
+<details>
+  <summary>:pushpin:</summary><br>
+<div markdown="1">
+ <br>
+<img src="https://user-images.githubusercontent.com/70312248/160416935-69f1774c-1fb3-42cb-ad90-c6c8f2f2a6fc.png" width="1300" height="750"/> 
+<br><br>
+• SD Card root directory configuration <br><br>
+<img src="https://user-images.githubusercontent.com/70312248/160417171-35900daf-f0c3-4ccd-b318-c20585d47bc8.png" width="700" height="400"/> 
+<br><br><br>
+</div>		
+</details>
+
+
+
+<br>
