@@ -570,10 +570,10 @@ void apSDCardTest(void)
  8000662:	2000      	movs	r0, #0
  8000664:	f001 fc10 	bl	8001e88 <uartPrintf>
 
-
     sd_info_t sd_info;
 
     /* SD Card의 정보를 출력, Get SD Card information*/
+
     if (sdGetInfo(&sd_info) == true)
  8000668:	f507 6388 	add.w	r3, r7, #1088	; 0x440
  800066c:	4618      	mov	r0, r3
@@ -666,7 +666,7 @@ void apSDCardTest(void)
 
     char rx_data;
 
-	uint32_t number = 0; // SD Card의 메모리 정보를 읽을 메모리 블럭 number 설정
+	uint32_t number = 0; // SD Card의 메모리 정보를 읽을 메모리 블럭 number 설정, Set number to read SD Card memory blocks
  8000728:	2300      	movs	r3, #0
  800072a:	f8c7 3474 	str.w	r3, [r7, #1140]	; 0x474
 	uint32_t pre_time;

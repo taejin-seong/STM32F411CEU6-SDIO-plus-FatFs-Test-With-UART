@@ -109,7 +109,6 @@ void apSDCardTest(void)
     sd_info_t sd_info;
 
     /* SD Card의 정보를 출력, Get SD Card information*/
-
     if (sdGetInfo(&sd_info) == true)
     {
     	uartPrintf(_DEF_UART1,"   card_type            : %d\n", sd_info.card_type);
@@ -130,7 +129,7 @@ void apSDCardTest(void)
 
     char rx_data;
 
-	uint32_t number = 0; // SD Card의 메모리 정보를 읽을 메모리 블럭 number 설정, Set number to read SD Card memory blocks
+	uint32_t number = 0; // SD Card의 메모리 정보를 읽을 메모리 블럭 number 설정
     uint32_t buf[512/4];
 
 	FATFS *fs;

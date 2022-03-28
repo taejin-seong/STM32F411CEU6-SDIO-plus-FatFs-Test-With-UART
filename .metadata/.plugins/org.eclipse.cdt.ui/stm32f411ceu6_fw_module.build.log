@@ -1,10 +1,23 @@
-15:33:10 **** Incremental Build of configuration Debug for project stm32f411ceu6_fw_module ****
+18:00:47 **** Incremental Build of configuration Debug for project stm32f411ceu6_fw_module ****
 make -j4 all 
+arm-none-eabi-gcc "../src/ap/ap.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32F411xE -c -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/ap" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/bsp" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/hw" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/lib" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/hw/common" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/hw/common/core" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/hw/common/hw/include" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/lib/stm32f411ceu6_fw_module/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/lib/stm32f411ceu6_fw_module/Drivers/CMSIS/Include" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/lib/stm32f411ceu6_fw_module/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/lib/FatFs/src" -I"C:/STM32 Coding files/stm32f411ceu6_fw/stm32f411ceu6_fw_module/src/hw/driver/fatfs" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"src/ap/ap.d" -MT"src/ap/ap.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "src/ap/ap.o"
+arm-none-eabi-gcc -o "stm32f411ceu6_fw_module.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\STM32 Coding files\stm32f411ceu6_fw\stm32f411ceu6_fw_module\src\bsp\ldscript\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f411ceu6_fw_module.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: stm32f411ceu6_fw_module.elf
+ 
+arm-none-eabi-objdump -h -S  stm32f411ceu6_fw_module.elf  > "stm32f411ceu6_fw_module.list"
+arm-none-eabi-objcopy  -O ihex  stm32f411ceu6_fw_module.elf  "stm32f411ceu6_fw_module.hex"
+arm-none-eabi-objcopy  -O binary  stm32f411ceu6_fw_module.elf  "stm32f411ceu6_fw_module.bin"
 arm-none-eabi-size   stm32f411ceu6_fw_module.elf 
    text	   data	    bss	    dec	    hex	filename
   50672	    144	   3608	  54424	   d498	stm32f411ceu6_fw_module.elf
 Finished building: default.size.stdout
+Finished building: stm32f411ceu6_fw_module.bin
+ 
+Finished building: stm32f411ceu6_fw_module.hex
+ 
+ 
+Finished building: stm32f411ceu6_fw_module.list
  
 
-15:33:15 Build Finished. 0 errors, 0 warnings. (took 4s.250ms)
+18:00:55 Build Finished. 0 errors, 0 warnings. (took 8s.15ms)
 
