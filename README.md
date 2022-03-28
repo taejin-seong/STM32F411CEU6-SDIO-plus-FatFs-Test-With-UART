@@ -20,7 +20,7 @@
 <br><br>
 
 
-## 2. System Configuration Diagram<br>
+## 2. System Configuration<br>
 ### 2.1.  Diagram
 <details>
   <summary>:pushpin:</summary><br>
@@ -70,10 +70,110 @@
 <div markdown="1">
 <br>
 <img src="https://user-images.githubusercontent.com/70312248/160384410-b2ef6da0-30ea-4cfe-b636-e7e3a2bff3ac.png" width="900" height="850"/> 
- <br><br>
 </div>		
 </details>
 
 
+<br><br>
+
+
+## 4. Cube MX Setting<br>
+### 4.1.  Clock Configuration
+<details>
+<summary>📌</summary><br> 
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/70312248/160401801-273d9fa9-4093-44ee-af39-6bb46ed37f52.png" width="1180" height="900"/> <br>
+<br><br>
+</div>
+</details>
+
+
+<hr/>
+
+### 4.2.  Pinout<br>
+<details>
+<summary>📌</summary><br>  
+<div markdown="1">
+  <p align="center">
+<img src="https://user-images.githubusercontent.com/70312248/160402063-85014d81-f34e-427f-bc57-0566f15d0777.png" width="800" height="700"/> <br>
+  </p>
+<br><br>
+</div>
+</details>
+
+<hr/>
+
+### 4.3.  Peripheral Configuration<br>
+#### 4.3.1. UART1
+
+<details>
+<summary>📌</summary><br>
+• You can change parameter settings in uart.c <br><br>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/70312248/160402633-56a78521-7b07-4a0c-9a59-8e083e8607a3.png" width="1000" height="800"/>
+<br><br>
+</div>
+</details>
+
+
+#### 4.3.2. SDIO
+
+<details>
+<summary>📌</summary><br>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/70312248/160402880-97229693-11d0-4f35-9959-96125fa9746c.png" width="1000" height="800"/>
+<br><br>
+</div>
+</details>
+
+
+#### 4.3.3. GPIO
+<details>
+<summary>📌</summary><br> 
+• SD Card Protocol에서 SDIO로 interface할 때 CD Pin은 필요없습니다. 이는  단지 SD Card 모듈에서 지원해주는 Pin입니다. SD 카드가 꽂히면(Detected), CD Pin은 <b>High → Low</b>로 동작합니다.  <br><br>
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/70312248/160403251-0f112dcd-e8fe-4e8b-8304-f30705099461.png" width="1000" height="800"/> 
+<br><br>
+</div>
+</details>
+
+
+
+#### 4.3.4. DMA
+<details>
+<summary>📌</summary><br>  
+<div markdown="1">
+  • <b> USART1 DMA Request Setting </b> <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;[USART1_RX]&nbsp;:&nbsp;&nbsp;Mode → <b>Circular</b> <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;[USART1_TX]&nbsp;:&nbsp;&nbsp;Mode → <b>Normal</b> (All Default) <br>
+  <br>
+  • <b> SDIO DMA Request Setting </b> <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;[SDIO_RX]&nbsp;:&nbsp;&nbsp;All Default <br>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;[SDIO_TX]&nbsp;:&nbsp;&nbsp;All Default <br>
+  <br><br>
+<img src="https://user-images.githubusercontent.com/70312248/160404638-6a264645-1f7f-4b07-a70e-f29ed1226ae5.png" width="1000" height="800"/> 
+<br><br>
+</div>
+</details>
+
+
+#### 4.3.5. NVIC
+<details>
+<summary>📌</summary><br>  
+<div markdown="1">
+<img src="https://user-images.githubusercontent.com/70312248/160405151-1796c670-cc28-450e-8a2d-f00c9401ad32.png" width="1000" height="800"/> 
+<br><br>
+</div>
+</details>
+
+
+#### 4.3.6. Middeware - FATFS
+<details>
+<summary>📌</summary><br>  
+<div markdown="1">
+• 직접 FATFS 파일 시스템을 포팅하였습니다. 
+</div>
+</details>
+<hr/>
 <br><br>
 
