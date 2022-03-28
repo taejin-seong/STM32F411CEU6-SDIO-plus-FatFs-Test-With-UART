@@ -52,7 +52,7 @@
 ### 3.1.  Test file path
 <details>
   <summary>:open_file_folder:</summary><br>
-  apSDCardTest 함수에서 제공하는 테스트 외에 다양한 테스트를 원할 경우 <strong> 2.2. NOTE </strong>를 참고하세요. <br><br>
+  apSDCardTest 함수에서 제공하는 테스트 외에 다양한 테스트를 원할 경우 <strong> 3.2. NOTE </strong>를 참고하세요. <br><br>
   <b> stm32f411ceu6_fw_module → src → ap → ap.c →void apSDCardTest(void){...} </b> <br>
 <div markdown="1">
  <br>
@@ -64,7 +64,7 @@
 ### 3.2. NOTE  
 <details>
 <summary>:open_file_folder:</summary><br>
-   STM32에서 제공하는 FAT32 라이브러리를 이용하여 쉽게 SD Card 내의 FAT32 파일 구조 기반의 File 제어가 가능합니다.
+   STM32에서 제공하는 FAT32 라이브러리를 이용하여 쉽게 SD Card 내의 FAT32 파일 시스템 구조 기반의 File 제어가 가능합니다.
    이를 참조하여 추가적인 테스트를 하시는 것을 추천합니다. <br><br>
   <b> stm32f411ceu6_fw_module → src → lib → FatFs → src → ff.h / ff.c </b> <br>
 <div markdown="1">
