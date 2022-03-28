@@ -1,10 +1,10 @@
-02:14:22 **** Incremental Build of configuration Debug for project stm32f411ceu6_fw_module ****
+15:33:10 **** Incremental Build of configuration Debug for project stm32f411ceu6_fw_module ****
 make -j4 all 
 arm-none-eabi-size   stm32f411ceu6_fw_module.elf 
    text	   data	    bss	    dec	    hex	filename
-  49780	    144	   3608	  53532	   d11c	stm32f411ceu6_fw_module.elf
+  50672	    144	   3608	  54424	   d498	stm32f411ceu6_fw_module.elf
 Finished building: default.size.stdout
  
 
-02:14:25 Build Finished. 0 errors, 0 warnings. (took 3s.37ms)
+15:33:15 Build Finished. 0 errors, 0 warnings. (took 4s.250ms)
 

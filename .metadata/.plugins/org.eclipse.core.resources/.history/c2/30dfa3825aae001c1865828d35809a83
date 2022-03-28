@@ -151,12 +151,11 @@ void apSDCardTest(void)
 		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
 			uartPrintf(_DEF_UART1, "Option | Description\n");
 		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
-		    uartPrintf(_DEF_UART1, "  a    | Read physical memory (number 0) information of SD card\n");
-			uartPrintf(_DEF_UART1, "  b    | Get volume information and print the free space 1\n");
-			uartPrintf(_DEF_UART1, "  c    | Open the directory and Read a directory item or file name & size\n");
-			uartPrintf(_DEF_UART1, "  d    | Create a HelloWorld.csv file and perform a w/r operation.\n");
-			uartPrintf(_DEF_UART1, "  e    | Delete HelloWorld.csv file and Read a directory item or file name & size\n");
-			uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
+		    uartPrintf(_DEF_UART1, "A,a    | Read physical memory (number 0) information of SD card\n");
+			uartPrintf(_DEF_UART1, "B,b    | Get volume information and print the free space 1\n");
+			uartPrintf(_DEF_UART1, "C,c    | Open the directory and Read a directory item or file name & size\n");
+			uartPrintf(_DEF_UART1, "D,d    | Create a HelloWorld.csv file and perform a w/r operation.\n");
+		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
 
 		    uartPrintf(_DEF_UART1, "\n");
 
@@ -167,7 +166,7 @@ void apSDCardTest(void)
 
 			switch(rx_data)
 			{
-				case 'a':
+				case 'a' | 'A':
 				    /* SD Card의 메모리 블럭의 정보 읽기 */
 
 					if (sdReadBlocks(number, (uint8_t *)buf, 1, 100) == true)
@@ -180,14 +179,14 @@ void apSDCardTest(void)
 
 				    else
 				    {
-				    	uartPrintf(_DEF_UART1,"sd read fail...\n\n");
+				    	uartPrintf(_DEF_UART1,"sd read fail...\n");
 				    }
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
 				    break;
 
 
-				case 'b':
+				case 'b' | 'B':
 					/* FATFS32 파일시스템 구조를 가지는  첫번째 드라이버 전체 볼륨(크기)과 남아있는 용량 출력 */
 
 					/* Get volume information and free clusters of drive 1 */
@@ -204,33 +203,33 @@ void apSDCardTest(void)
 
 					else
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
 					break;
 
 
-				case 'c':
+				case 'c' | 'C':
 					/* FATFS32 파일시스템 구조를 가지는  첫번째 드라이버의  root 디렉토리에 있는  폴더 이름 또는 파일 이름과 용량을 출력 */
 
 					/* "/" : root 디렉토리 */
 					res = fatfsDir("/");
 					if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
 					break;
 
 
-				case'd':
+				case'd' | 'D':
 					/* HelloWorld.csv 파일 생성 후 HelloWorld.csv 파일에 f_printf()로 쓰고 다시 내용물을 1byte씩 읽어서 출력*/
 
 					pre_time = millis();
 					/* Write 동작 */
-					res = f_open(&log_file, "HelloWorld.csv", FA_CREATE_ALWAYS | FA_WRITE | FA_READ); // 덮어쓰기(over write), W/R 가능한 파일 생성
+					res = f_open(&log_file, "HelloWorld.csv", FA_CREATE_ALWAYS | FA_WRITE | FA_READ);
 //					res = f_open(&log_file, "1.txt", FA_CREATE_ALWAYS | FA_WRITE | FA_READ);
 
 					if (res == FR_OK)
@@ -252,7 +251,7 @@ void apSDCardTest(void)
 					   UINT len;
 					   uint8_t data;
 						/* Read 동작 */
-					   while(1)
+					   while(uartAvailable(_DEF_UART1))
 					   {
 						   len = 0;
 						   res = f_read(&log_file, &data, 1, &len);
@@ -278,32 +277,6 @@ void apSDCardTest(void)
 					}
 
 					uartPrintf(_DEF_UART1,"%d ms\r\n", millis()-pre_time);
-
-				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
-					break;
-
-				case 'e':
-					/* 루트 디렉토리에 있는 HelloWorld.csv 파일 삭제 */
-
-					/*  /HelloWorld.csv : 루트디렉토리 -> HelloWorld.csv 경로의 파일 삭제 */
-					res = f_unlink("/HelloWorld.csv");
-					if (res == FR_OK)
-					{
-					    uartPrintf(_DEF_UART1, "HelloWorld.csv file has been successfully deleted. \n");
-					    uartPrintf(_DEF_UART1, "Displays the current folder or file in the root directory of the SD card. \n\n");
-					}
-
-					else if (res != FR_OK)
-					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
-					}
-
-				    /* 루트 디렉토에 있는 폴더 또는 파일 (용량) 출력 */
-				    res = fatfsDir("/");
-					if (res != FR_OK)
-					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
-					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
 					break;

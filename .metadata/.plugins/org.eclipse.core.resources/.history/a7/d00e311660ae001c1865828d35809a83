@@ -180,7 +180,7 @@ void apSDCardTest(void)
 
 				    else
 				    {
-				    	uartPrintf(_DEF_UART1,"sd read fail...\n\n");
+				    	uartPrintf(_DEF_UART1,"sd read fail...\n");
 				    }
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -204,7 +204,7 @@ void apSDCardTest(void)
 
 					else
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -218,7 +218,7 @@ void apSDCardTest(void)
 					res = fatfsDir("/");
 					if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -287,22 +287,20 @@ void apSDCardTest(void)
 
 					/*  /HelloWorld.csv : 루트디렉토리 -> HelloWorld.csv 경로의 파일 삭제 */
 					res = f_unlink("/HelloWorld.csv");
-					if (res == FR_OK)
+
+					if (res != FR_OK)
 					{
-					    uartPrintf(_DEF_UART1, "HelloWorld.csv file has been successfully deleted. \n");
-					    uartPrintf(_DEF_UART1, "Displays the current folder or file in the root directory of the SD card. \n\n");
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
-					else if (res != FR_OK)
-					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
-					}
+				    uartPrintf(_DEF_UART1, "HelloWorld.csv file has been successfully deleted. \n");
+				    uartPrintf(_DEF_UART1, "Displays the current folder or file in the root directory of the SD card. \n\n");
 
 				    /* 루트 디렉토에 있는 폴더 또는 파일 (용량) 출력 */
 				    res = fatfsDir("/");
 					if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");

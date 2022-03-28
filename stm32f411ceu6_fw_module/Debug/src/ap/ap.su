@@ -2,4 +2,4 @@ ap.c:14:7:apInit	8	static
 ap.c:21:6:apBoardLedTest	8	static
 ap.c:33:6:apUartTest	8	static
 ap.c:50:9:fatfsDir	360	static
-ap.c:81:6:apSDCardTest	1184	static
+ap.c:81:6:apSDCardTest	1176	static

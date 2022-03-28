@@ -147,7 +147,7 @@ void apSDCardTest(void)
 		{
 
 		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
-			uartPrintf(_DEF_UART1, "Select the SD Card Test...\n");
+			uartPrintf(_DEF_UART1, "  					  < Select the SD Card Test >\n");
 		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");
 			uartPrintf(_DEF_UART1, "Option | Description\n");
 		    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n");

@@ -180,7 +180,7 @@ void apSDCardTest(void)
 
 				    else
 				    {
-				    	uartPrintf(_DEF_UART1,"sd read fail...\n\n");
+				    	uartPrintf(_DEF_UART1,"sd read fail...\n");
 				    }
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -204,7 +204,7 @@ void apSDCardTest(void)
 
 					else
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -218,7 +218,7 @@ void apSDCardTest(void)
 					res = fatfsDir("/");
 					if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
@@ -295,14 +295,14 @@ void apSDCardTest(void)
 
 					else if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    /* 루트 디렉토에 있는 폴더 또는 파일 (용량) 출력 */
 				    res = fatfsDir("/");
 					if (res != FR_OK)
 					{
-						uartPrintf(_DEF_UART1," err : %d\n\n", res);
+						uartPrintf(_DEF_UART1," err : %d\n", res);
 					}
 
 				    uartPrintf(_DEF_UART1, "-------------------------------------------------------------------------\n\n");
