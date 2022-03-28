@@ -227,7 +227,7 @@
   <summary>:pushpin:</summary><br>
 <div markdown="1">
  <br>
-  • SD Card root directory configuration <br><br>
+  • SD Card root directory current state <br><br>
 <img src="https://user-images.githubusercontent.com/70312248/160413609-552fc1e4-586c-4115-8094-360147da70dd.png" width="700" height="400"/> 
 <br>
 <img src="https://user-images.githubusercontent.com/70312248/160414219-39524921-67cf-4559-aa5b-10948806d4de.png" width="1300" height="750"/> 
