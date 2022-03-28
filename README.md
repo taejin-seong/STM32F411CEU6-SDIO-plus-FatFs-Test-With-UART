@@ -174,7 +174,7 @@
 • 직접 FATFS 파일 시스템을 포팅하였습니다. 
 </div>
 </details>
-<hr/>
+
 
 
 <br><br>
@@ -208,7 +208,7 @@
   <summary>:pushpin:</summary><br>
 <div markdown="1">
  <br>
-• SD Card root directory configuration <br><br>
+• SD Card root directory current state <br><br>
 <img src="https://user-images.githubusercontent.com/70312248/160413609-552fc1e4-586c-4115-8094-360147da70dd.png" width="700" height="400"/> 
 <br>
 
@@ -242,7 +242,7 @@
  <br>
 <img src="https://user-images.githubusercontent.com/70312248/160414412-e0edba11-a419-4eab-bb59-d74ffe97b947.png" width="1300" height="750"/> 
 <br><br>
-• SD Card root directory configuration <br><br>
+• SD Card root directory current state <br><br>
 <img src="https://user-images.githubusercontent.com/70312248/160414642-9778f312-0019-4ae9-9218-e4f04f17b14b.png" width="700" height="400"/> 
 <br><br><br>
 • Test C again <br><br> 
@@ -261,12 +261,16 @@
  <br>
 <img src="https://user-images.githubusercontent.com/70312248/160416935-69f1774c-1fb3-42cb-ad90-c6c8f2f2a6fc.png" width="1300" height="750"/> 
 <br><br>
-• SD Card root directory configuration <br><br>
+• SD Card root directory current state <br><br>
 <img src="https://user-images.githubusercontent.com/70312248/160417171-35900daf-f0c3-4ccd-b318-c20585d47bc8.png" width="700" height="400"/> 
 <br><br><br>
 </div>		
 </details>
 
 
+<br><br>
 
-<br>
+
+## Refer<br>
+
+
