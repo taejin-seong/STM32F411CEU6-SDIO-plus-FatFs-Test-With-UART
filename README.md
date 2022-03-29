@@ -64,7 +64,7 @@
 ### NOTE  
 <details>
 <summary>:open_file_folder:</summary><br>
-   STM32에서 제공하는 FAT32 라이브러리를 이용하여 쉽게 SD Card 내의 FAT32 파일 시스템 구조 기반의 File 제어가 가능합니다.
+   STM32에서 제공하는 FatFS 라이브러리의 API를 이용하면 SD Card 내에 FAT32 파일 시스템 구조 기반의 File 제어 (생성/W/R/삭제/이동/변경 등..)가 아주 쉽게 가능해집니다.
    이를 참조하여 추가적인 테스트를 하시는 것을 추천합니다. <br><br>
   <b> stm32f411ceu6_fw_module → src → lib → FatFs → src → ff.h / ff.c </b> <br>
 <div markdown="1">
