@@ -263,7 +263,7 @@
 <br><br>
 • SD Card root directory current state <br><br>
 <img src="https://user-images.githubusercontent.com/70312248/160417171-35900daf-f0c3-4ccd-b318-c20585d47bc8.png" width="700" height="400"/> 
-<br><br><br>
+<br><br>
 </div>		
 </details>
 
@@ -272,6 +272,6 @@
 
 
 ## Refer to<br>
-https://github.com/chcbaram/stm32f411
+* https://github.com/chcbaram/stm32f411
 
 
