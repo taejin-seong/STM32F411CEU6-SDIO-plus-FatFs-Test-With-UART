@@ -1,27 +1,27 @@
-## 1. Dev environment<br>
-### 1.1.  IDE
+## Dev environment<br>
+### IDE
 * STM32CubeIDE 1.6.0 <br>
 * STM32CubeMX <br>
 
-### 1.2.  Terminal Program
+### Terminal Program
 * Tera Term <br>
 
-### 1.3.  Development Board
+### Development Board
 * **STM32F411CEU6 (Black Pill Board)** <br>
   + :pushpin: [Image Link](https://www.google.com/search?q=STM32F411CEU6+Black+Pill&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjZgOijwuj2AhWEe94KHVSECOsQ_AUoAXoECAIQAw&biw=1366&bih=695&dpr=1)<br>
   
-### 1.4.  MicroSD & SD Card module 
+### MicroSD & SD Card module 
 * Using 8GB MicroSD   (MicroSD capacity is not important)
 * Using **NS-SD01** SD Card module 
   + :pushpin: [Image Link](https://nulsom.com/portfolio/ns-sd01_kr/)<br>
   + If the SD card module supports the SDIO interface, it can be tested.
   + In addition, in this project, SD cards are detected using CD pins.
   
-<br><br>
+<br>
 
 
-## 2. System Configuration<br>
-### 2.1.  Diagram
+## System Configuration<br>
+### Diagram
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -31,7 +31,7 @@
 </div>		
 </details>
 
-### 2.2. Pic
+### Pic
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -45,14 +45,14 @@
 
 
 
-<br><br>
+<br>
 
 
-## 3. Where's the file?<br>
-### 3.1.  Test file path
+## Where's the file?<br>
+### Test file path
 <details>
   <summary>:open_file_folder:</summary><br>
-  apSDCardTest 함수에서 제공하는 테스트 외에 다양한 테스트를 원할 경우 <strong> 3.2. NOTE </strong>를 참고하세요. <br><br>
+  apSDCardTest 함수에서 제공하는 테스트 외에 다양한 테스트를 원할 경우 <strong> NOTE </strong>를 참고하세요. <br><br>
   <b> stm32f411ceu6_fw_module → src → ap → ap.c →void apSDCardTest(void){...} </b> <br>
 <div markdown="1">
  <br>
@@ -61,7 +61,7 @@
 </div>		
 </details>
 
-### 3.2. NOTE  
+### NOTE  
 <details>
 <summary>:open_file_folder:</summary><br>
    STM32에서 제공하는 FAT32 라이브러리를 이용하여 쉽게 SD Card 내의 FAT32 파일 시스템 구조 기반의 File 제어가 가능합니다.
@@ -74,11 +74,11 @@
 </details>
 
 
-<br><br>
+<br>
 
 
-## 4. Cube MX Setting<br>
-### 4.1.  Clock Configuration
+## STM32Cube MX Setting<br>
+### Clock Configuration
 <details>
 <summary>📌</summary><br> 
 <div markdown="1">
@@ -90,7 +90,7 @@
 
 <hr/>
 
-### 4.2.  Pinout<br>
+### Pinout<br>
 <details>
 <summary>📌</summary><br>  
 <div markdown="1">
@@ -103,8 +103,8 @@
 
 <hr/>
 
-### 4.3.  Peripheral Configuration<br>
-#### 4.3.1. UART1
+### Peripheral Configuration<br>
+#### 1. UART1
 
 <details>
 <summary>📌</summary><br>
@@ -116,7 +116,7 @@
 </details>
 
 
-#### 4.3.2. SDIO
+#### 2. SDIO
 
 <details>
 <summary>📌</summary><br>
@@ -127,7 +127,7 @@
 </details>
 
 
-#### 4.3.3. GPIO
+#### 3. GPIO
 <details>
 <summary>📌</summary><br> 
 • SD Card Protocol에서 SDIO로 interface할 때 CD Pin은 필요없습니다. 이는  단지 SD Card 모듈에서 지원해주는 Pin입니다. SD 카드가 꽂히면(Detected), CD Pin은 <b>High → Low</b>로 동작합니다.  <br><br>
@@ -139,7 +139,7 @@
 
 
 
-#### 4.3.4. DMA
+#### 4. DMA
 <details>
 <summary>📌</summary><br>  
 <div markdown="1">
@@ -157,7 +157,7 @@
 </details>
 
 
-#### 4.3.5. NVIC
+#### 5. NVIC
 <details>
 <summary>📌</summary><br>  
 <div markdown="1">
@@ -167,7 +167,7 @@
 </details>
 
 
-#### 4.3.6. Middeware - FATFS
+#### 6. Middeware - FATFS
 <details>
 <summary>📌</summary><br>  
 <div markdown="1">
@@ -177,11 +177,11 @@
 
 
 
-<br><br>
+<br>
 
 
-## 5. Testing<br>
-### 5.1.  Sd Card Detection and Information print
+##  Testing<br>
+### 1.  Sd Card Detection and Information print
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -191,7 +191,7 @@
 </div>		
 </details>
 
-### 5.2.  a
+### 2.  a
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -203,7 +203,7 @@
 
 
 
-### 5.3.  b
+### 3.  b
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -218,11 +218,11 @@
 
   
   
-<br><br>
+<br>
 </div>		
 </details>
 
-### 5.4.  c
+### 4.  c
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -235,7 +235,7 @@
 </div>		
 </details>
 
-### 5.5.  d
+### 5.  d
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -254,7 +254,7 @@
 </div>		
 </details>
 
-### 5.6.  e
+### 6.  e
 <details>
   <summary>:pushpin:</summary><br>
 <div markdown="1">
@@ -268,7 +268,7 @@
 </details>
 
 
-<br><br>
+<br>
 
 
 ## Refer to<br>
