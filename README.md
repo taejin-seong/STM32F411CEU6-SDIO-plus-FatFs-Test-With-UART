@@ -103,7 +103,7 @@
 
 <hr/>
 
-### Peripheral Configuration & Core<br>
+### Peripheral & Core Configuration<br>
 #### 1. UART1
 
 <details>
