@@ -273,7 +273,7 @@
 ## Note <br>
 * When you build a project, you must exclude folders in the following paths from the build and debug entries: <br>
 
-  + **`src → lib → Core`**
+  + **`stm32f411ceu6_fw_module → src → lib → Core`**
 
 ## Refer to<br>
 https://github.com/chcbaram/stm32f411
