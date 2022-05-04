@@ -286,7 +286,7 @@ When you build a project, you must **exclude** folders in the following paths fr
 <br><br><br>
   
 • The results are as follows. <br><br>
-<img src="https://user-images.githubusercontent.com/70312248/166665097-75e0de2d-5408-4d7c-8544-dc5f011807af.png" width="100" height="35"/> 
+<img src="https://user-images.githubusercontent.com/70312248/166665097-75e0de2d-5408-4d7c-8544-dc5f011807af.png" width="100" height="30"/> 
 <br><br><br><br>
   
 </div>		
