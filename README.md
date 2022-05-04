@@ -270,6 +270,10 @@
 
 <br>
 
+## Note <br>
+* When you build a project, you must exclude folders in the following paths from the build and debug entries: <br>
+
+  + **`src → lib → Core`**
 
 ## Refer to<br>
 https://github.com/chcbaram/stm32f411
