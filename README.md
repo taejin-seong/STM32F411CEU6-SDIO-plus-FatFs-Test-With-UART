@@ -22,14 +22,13 @@
 
 ## System Configuration<br>
 ### Diagram
-<details>
-  <summary>:pushpin:</summary><br>
-<div markdown="1">
  <br>
+ 
+<p align="center">  
 <img src="https://user-images.githubusercontent.com/70312248/160398187-fc8c693d-bd9a-480a-bfae-05104bdede01.png" width="1000" height="400"/> 
-<br><br>
-</div>		
-</details>
+</p>
+<br>
+
 
 ### Pic
 <details>
