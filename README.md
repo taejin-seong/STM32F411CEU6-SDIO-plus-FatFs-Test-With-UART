@@ -15,7 +15,7 @@
 * Using **NS-SD01** SD Card module 
   + :pushpin: [Image Link](https://nulsom.com/portfolio/ns-sd01_kr/)<br>
   + If the SD card module supports the SDIO interface, it can be tested.
-  + In addition, in this project, SD cards are detected using CD pins.
+  + In addition, in this project, SD cards are detected using CD pin.
   
 <br>
 
