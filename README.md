@@ -165,8 +165,11 @@
 </div>
 </details>
 
+<hr/>
 
-#### 6. Middeware - FATFS
+### Middeware<br>
+#### 1. FATFS
+
 <details>
 <summary>📌</summary><br>  
 <div markdown="1">
