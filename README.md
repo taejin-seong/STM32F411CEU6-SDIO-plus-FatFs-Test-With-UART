@@ -167,7 +167,7 @@
 
 <hr/>
 
-### Middeware<br>
+### Middleware<br>
 #### 1. FATFS
 
 <details>
